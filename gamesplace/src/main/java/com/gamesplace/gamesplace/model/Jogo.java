@@ -16,22 +16,26 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "tb_jogo")
 public class Jogo {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long id;
-	
+
 	@NotNull
 	public String titulo;
-	
+
 	@NotNull
 	@Column(precision = 6, scale = 2)
 	public BigDecimal valor;
-	
+
 	@NotNull
 	@ManyToOne
 	@JsonIgnoreProperties("jogo")
 	private Categoria categoria;
+
+	@ManyToOne
+	@JsonIgnoreProperties("jogo")
+	private Usuario usuario;
 
 	public Long getId() {
 		return id;
@@ -64,4 +68,13 @@ public class Jogo {
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
 }
